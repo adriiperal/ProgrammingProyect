@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import exceptions.InvalidLoanException;
 
 public class Loan {
+	public static final int DAYS_TO_RETURN = 14;
 	private String bookCode;
 	private String bookTitle;
 	private User member;
@@ -24,16 +25,16 @@ public class Loan {
 		this.bookTitle = bookTitle;
 		this.member = member;
 		this.LoanDate = loanDate;
-		this.dueDate = loanDate.plusDays(14);
+		this.dueDate = loanDate.plusDays(DAYS_TO_RETURN);
 		this.actualReturnDate = null;
 
 	}
 
-	public LocalDate registerReturn(LocalDate date) throws InvalidLoanException {
-		if (date == null || date.isBefore(LoanDate)) {
-			throw new InvalidLoanException("date cant be null or before the loan date");
-		}
-		return date;
+	public void registerReturn(LocalDate date) throws InvalidLoanException {
+	    if (date == null || date.isBefore(LoanDate)) {
+	        throw new InvalidLoanException("Date cannot be null or before the loan date.");
+	    }
+	    this.actualReturnDate = date;
 	}
 
 	public int calculateDelayDays() {
@@ -60,6 +61,54 @@ public class Loan {
 	}
 	
 	
+
+	public String getBookCode() {
+		return bookCode;
+	}
+
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
+	}
+
+	public String getBookTitle() {
+		return bookTitle;
+	}
+
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+
+	public User getMember() {
+		return member;
+	}
+
+	public void setMember(User member) {
+		this.member = member;
+	}
+
+	public LocalDate getLoanDate() {
+		return LoanDate;
+	}
+
+	public void setLoanDate(LocalDate loanDate) {
+		LoanDate = loanDate;
+	}
+
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(LocalDate dueDate) {
+		this.dueDate = dueDate;
+	}
+
+	public LocalDate getActualReturnDate() {
+		return actualReturnDate;
+	}
+
+	public void setActualReturnDate(LocalDate actualReturnDate) {
+		this.actualReturnDate = actualReturnDate;
+	}
 
 	@Override
 	public String toString() {

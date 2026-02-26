@@ -29,6 +29,54 @@ public class User {
 		this.sanctionEndDate = null;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMemberNumber() {
+		return memberNumber;
+	}
+
+	public void setMemberNumber(String memberNumber) {
+		this.memberNumber = memberNumber;
+	}
+
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	public boolean isSanctioned() {
+		return sanctioned;
+	}
+
+	public void setSanctioned(boolean sanctioned) {
+		this.sanctioned = sanctioned;
+	}
+
+	public LocalDate getSanctionEndDate() {
+		return sanctionEndDate;
+	}
+
+	public void setSanctionEndDate(LocalDate sanctionEndDate) {
+		this.sanctionEndDate = sanctionEndDate;
+	}
+
 	public void sanction(int days) {
 		this.sanctioned = true;
 		this.sanctionEndDate = LocalDate.now().plusDays(days);
