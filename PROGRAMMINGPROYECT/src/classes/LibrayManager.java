@@ -29,7 +29,7 @@ public class LibrayManager {
 
 	}
 
-	public void issueLoan(String bookCode, String title, LocalDate date, User u)
+	public void registerLoan(String bookCode, String title, LocalDate date, User u)
 			throws InvalidLoanException, SanctionedUserException, BookNotAvailableException {
 		if (u.isSanctioned()) {
 			throw new SanctionedUserException("User is sanctioned.");

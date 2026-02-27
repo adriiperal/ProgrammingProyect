@@ -3,7 +3,6 @@ package classes;
 import java.util.*;
 
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 
 import exceptions.*;
 
@@ -34,7 +33,7 @@ public class App {
 					registerUser();
 					break;
 				case 2:
-					issueLoan();
+					registerLoan();
 					break;
 				case 3:
 					returnBook();
@@ -82,12 +81,12 @@ public class App {
 		int y = Integer.parseInt(keyboard.nextLine());
 		
 		LocalDate date = LocalDate.of(y, m, d);
-		User newUser = new User(name, email, id, date, false, null);
+		User newUser = new User(name, email, id, date);
 		manager.registeruser(newUser);
 		System.out.println("User registered successfully.");
 	}
 
-	private static void issueLoan() throws Exception {
+	private static void registerLoan() throws Exception {
 		System.out.print("Member ID: ");
 		String id = keyboard.nextLine();
 		User u = manager.findUser(id);
@@ -99,8 +98,8 @@ public class App {
 		System.out.print("Title: ");
 		String title = keyboard.nextLine();
 		
-		manager.issueLoan(code, title, LocalDate.now(), u);
-        System.out.println("Loan issued successfully.");
+		manager.registerLoan(code, title, LocalDate.now(), u);
+        System.out.println("Loan registered successfully.");
 	}
 
 	private static void returnBook() throws Exception {
@@ -111,23 +110,41 @@ public class App {
 		if(canReturn) {
 			System.out.println("valid return");
 		}else {
-			throw new BookNotAvailableException("not aviable book");
+			throw new BookNotAvailableException("not avaible book");
 		}
 	}
 
 	private static void checkUserStatus() throws Exception {
 		System.out.println("User ID:  ");
 		String id = keyboard.nextLine();
-		
+		User u = manager.findUser(id);
+		if(u!=null) {
+		System.out.println(u.toString());
+		}else {
+			System.out.println("User not found");
+		}
 	}
 
 	private static void showActiveLoans() throws Exception {
+		System.out.println("active loans");
+		for(Loan loans : manager.getLoans()) {
+			if(loans.getActualReturnDate()==null) {
+				System.out.println(loans.toString());
+			}
+		}
 	}
 
 	private static void showSanctionedUsers() throws Exception {
+		System.out.println("sanctioned Users :");
+		for(User users : manager.getUsers()) {
+			if(users.isSancioned()) {
+				System.out.println(users.toString());
+			}
+		}
 	}
 
 	private static void updateSanctions() throws Exception {
+		
 
 	}
 }

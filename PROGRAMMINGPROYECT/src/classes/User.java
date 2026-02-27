@@ -12,8 +12,8 @@ public class User {
 	private boolean sanctioned;
 	private LocalDate sanctionEndDate;
 
-	public User(String name, String email, String memberNumber, LocalDate registrationDate, boolean sanctioned,
-			LocalDate sanctionEndDate) throws InvalidUserException {
+	public User(String name, String email, String memberNumber, LocalDate registrationDate)
+			throws InvalidUserException {
 
 		if (!email.contains("@") || !email.contains(".")) {
 			throw new InvalidUserException("Invalid email format.");
@@ -25,8 +25,7 @@ public class User {
 		this.email = email;
 		this.memberNumber = memberNumber;
 		this.registrationDate = registrationDate;
-		this.sanctioned = false;
-		this.sanctionEndDate = null;
+
 	}
 
 	public String getName() {
